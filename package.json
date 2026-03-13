@@ -20,9 +20,11 @@
         "dev:prisma:db:push": "yarn with-env yarn workspace @sourcebot/db prisma:db:push",
         "build:deps": "yarn workspaces foreach --recursive --topological --from '{@sourcebot/schemas,@sourcebot/db,@sourcebot/shared,@sourcebot/query-language}' run build",
         "openapi:generate": "yarn workspace @sourcebot/web openapi:generate",
+        "client:generate": "yarn openapi:generate && yarn workspace @sourcebot/client generate",
         "tool:decrypt-jwe": "yarn with-env yarn workspace @sourcebot/web tool:decrypt-jwe"
     },
     "devDependencies": {
+        "@openapitools/openapi-generator-cli": "^2.30.2",
         "concurrently": "^9.2.1",
         "cross-env": "^7.0.3",
         "dotenv-cli": "^8.0.0"

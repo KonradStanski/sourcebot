@@ -682,6 +682,7 @@
   "paths": {
     "/api/search": {
       "post": {
+        "operationId": "search",
         "tags": [
           "Search"
         ],
@@ -732,6 +733,7 @@
     },
     "/api/stream_search": {
       "post": {
+        "operationId": "streamSearch",
         "tags": [
           "Search"
         ],
@@ -783,6 +785,7 @@
     },
     "/api/repos": {
       "get": {
+        "operationId": "listRepositories",
         "tags": [
           "Repositories"
         ],
@@ -898,6 +901,7 @@
     },
     "/api/version": {
       "get": {
+        "operationId": "getVersion",
         "tags": [
           "Misc"
         ],
@@ -918,6 +922,7 @@
     },
     "/api/source": {
       "get": {
+        "operationId": "getFileSource",
         "tags": [
           "Files"
         ],
@@ -994,6 +999,7 @@
     },
     "/api/tree": {
       "post": {
+        "operationId": "getFileTree",
         "tags": [
           "Files"
         ],
@@ -1063,6 +1069,7 @@
     },
     "/api/files": {
       "post": {
+        "operationId": "listFiles",
         "tags": [
           "Files"
         ],

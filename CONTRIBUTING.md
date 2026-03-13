@@ -34,7 +34,7 @@ Want to take on an issue? Leave a comment and a maintainer may assign it to you 
 
 ## Developing Sourcebot
 
-1. Install <a href="https://go.dev/doc/install"><img src="https://go.dev/favicon.ico" width="16" height="16"> go</a>, <a href="https://docs.docker.com/get-started/get-docker/"><img src="https://www.docker.com/favicon.ico" width="16" height="16"> docker</a>, and <a href="https://nodejs.org/"><img src="https://nodejs.org/favicon.ico" width="16" height="16"> NodeJS</a>. Note that a NodeJS version of at least `24` is required.
+1. Install <a href="https://go.dev/doc/install"><img src="https://go.dev/favicon.ico" width="16" height="16"> go</a>, <a href="https://docs.docker.com/get-started/get-docker/"><img src="https://www.docker.com/favicon.ico" width="16" height="16"> docker</a>, <a href="https://nodejs.org/"><img src="https://nodejs.org/favicon.ico" width="16" height="16"> NodeJS</a>, and <a href="https://openjdk.org/install/"><img src="https://openjdk.org/favicon.ico" width="16" height="16"> Java</a>. Note that a NodeJS version of at least `24` is required.
 
 2. Install [ctags](https://github.com/universal-ctags/ctags) (required by zoekt)
     ```sh
@@ -92,6 +92,22 @@ Want to take on an issue? Leave a comment and a maintainer may assign it to you 
     A `.sourcebot` directory will be created and zoekt will begin to index the repositories found in the `config.json` file.
 
 10. Start searching at `http://localhost:3000`.
+
+## Regenerating OpenAPI Artifacts
+
+If you change the public REST API, its schemas, or the OpenAPI document source, regenerate the derived artifacts before opening a PR:
+
+```sh
+yarn openapi:generate
+yarn workspace @sourcebot/client generate
+yarn workspace @sourcebot/client build
+```
+
+The first command updates the checked-in public OpenAPI spec at `docs/api-reference/sourcebot-public.openapi.json`.
+
+The second command regenerates the publishable TypeScript client in `packages/client/src/generated`. This step requires Java because `@openapitools/openapi-generator-cli` wraps the OpenAPI Generator JAR.
+
+The third command verifies that the generated client package still builds cleanly.
 
 ## Pull Request Expectations
 

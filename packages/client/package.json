@@ -1,0 +1,44 @@
+{
+  "name": "@sourcebot/client",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "generate": "node ./tools/generateClient.mjs",
+    "prepack": "yarn build"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.30.2",
+    "@types/node": "^22.7.5",
+    "typescript": "^5.7.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sourcebot-dev/sourcebot.git",
+    "directory": "packages/client"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "sourcebot",
+    "openapi",
+    "typescript",
+    "client",
+    "sdk"
+  ],
+  "sideEffects": false
+}

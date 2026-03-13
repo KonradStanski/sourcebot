@@ -80,6 +80,7 @@ export function createPublicOpenApiDocument(version: string) {
     registry.registerPath({
         method: 'post',
         path: '/api/search',
+        operationId: 'search',
         tags: [searchTag.name],
         summary: 'Run a blocking code search',
         request: {
@@ -101,6 +102,7 @@ export function createPublicOpenApiDocument(version: string) {
     registry.registerPath({
         method: 'post',
         path: '/api/stream_search',
+        operationId: 'streamSearch',
         tags: [searchTag.name],
         summary: 'Run a streaming code search',
         description: 'Returns a server-sent event stream. Each event data payload is a JSON object describing either a chunk, final summary, or error.',
@@ -127,6 +129,7 @@ export function createPublicOpenApiDocument(version: string) {
     registry.registerPath({
         method: 'get',
         path: '/api/repos',
+        operationId: 'listRepositories',
         tags: [reposTag.name],
         summary: 'List repositories',
         request: {
@@ -161,6 +164,7 @@ export function createPublicOpenApiDocument(version: string) {
     registry.registerPath({
         method: 'get',
         path: '/api/version',
+        operationId: 'getVersion',
         tags: [miscTag.name],
         summary: 'Get Sourcebot version',
         responses: {
@@ -174,6 +178,7 @@ export function createPublicOpenApiDocument(version: string) {
     registry.registerPath({
         method: 'get',
         path: '/api/source',
+        operationId: 'getFileSource',
         tags: [filesTag.name],
         summary: 'Get file contents',
         request: {
@@ -193,6 +198,7 @@ export function createPublicOpenApiDocument(version: string) {
     registry.registerPath({
         method: 'post',
         path: '/api/tree',
+        operationId: 'getFileTree',
         tags: [filesTag.name],
         summary: 'Get a file tree',
         request: {
@@ -215,6 +221,7 @@ export function createPublicOpenApiDocument(version: string) {
     registry.registerPath({
         method: 'post',
         path: '/api/files',
+        operationId: 'listFiles',
         tags: [filesTag.name],
         summary: 'List files in a repository revision',
         request: {
