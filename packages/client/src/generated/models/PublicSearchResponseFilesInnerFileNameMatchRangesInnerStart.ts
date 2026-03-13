@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Sourcebot Public API
- * OpenAPI description for the public Sourcebot REST endpoints used for search, repository listing, and file browsing.
+ * OpenAPI description for the public Sourcebot REST endpoints used for search, repository listing, and file browsing. Authentication is instance-dependent: API keys are the standard integration mechanism, OAuth bearer tokens are EE-only, and some instances may allow anonymous access.
  *
  * The version of the OpenAPI document: v4.15.6
  * 

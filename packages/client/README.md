@@ -15,7 +15,7 @@ import { Configuration, RepositoriesApi, SearchApi } from '@sourcebot/client';
 
 const config = new Configuration({
   basePath: 'https://your-sourcebot-instance.example.com',
-  accessToken: 'sb_your_api_key',
+  apiKey: 'sbk_your_api_key',
 });
 
 const reposApi = new RepositoriesApi(config);
@@ -27,12 +27,23 @@ const repos = await reposApi.listRepositories({
 });
 
 const results = await searchApi.runABlockingCodeSearch({
-  publicSearchRequest: {
+  PublicSearchRequest: {
     query: 'openapi',
     matches: 10,
   },
 });
 ```
+
+You can also send the same API key as a bearer token:
+
+```ts
+const config = new Configuration({
+  basePath: 'https://your-sourcebot-instance.example.com',
+  accessToken: 'sbk_your_api_key',
+});
+```
+
+On EE instances with OAuth enabled, `accessToken` also accepts Sourcebot OAuth access tokens with the `sboa_...` prefix.
 
 ## Regenerate
 
