@@ -49,13 +49,13 @@ const securitySchemes: Record<string, SecuritySchemeObject> = {
     bearerAuth: {
         type: 'http',
         scheme: 'bearer',
-        description: 'Send a Sourcebot API key, legacy API key, or OAuth access token in the Authorization header.',
+        description: 'Send either a Sourcebot API key (`sbk_...` or legacy `sourcebot-...`) or, on EE instances with OAuth enabled, an OAuth access token (`sboa_...`) in the Authorization header.',
     },
     sourcebotApiKey: {
         type: 'apiKey',
         in: 'header',
         name: 'X-Sourcebot-Api-Key',
-        description: 'Send a Sourcebot API key in the X-Sourcebot-Api-Key header.',
+        description: 'Send a Sourcebot API key (`sbk_...` or legacy `sourcebot-...`) in the X-Sourcebot-Api-Key header.',
     },
 };
 
@@ -248,11 +248,12 @@ export function createPublicOpenApiDocument(version: string) {
         info: {
             title: 'Sourcebot Public API',
             version,
-            description: 'OpenAPI description for the public Sourcebot REST endpoints used for search, repository listing, and file browsing.',
+            description: 'OpenAPI description for the public Sourcebot REST endpoints used for search, repository listing, and file browsing. Authentication is instance-dependent: API keys are the standard integration mechanism, OAuth bearer tokens are EE-only, and some instances may allow anonymous access.',
         },
         security: [
             { bearerAuth: [] },
             { sourcebotApiKey: [] },
+            {},
         ],
         tags: [searchTag, reposTag, filesTag, miscTag],
     });
