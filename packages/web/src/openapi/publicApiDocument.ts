@@ -1,6 +1,6 @@
 import { OpenAPIRegistry, OpenApiGeneratorV3 } from '@asteasolutions/zod-to-openapi';
 import type { ZodTypeAny } from 'zod';
-import type { SchemaObject } from 'openapi3-ts/oas30';
+import type { ComponentsObject, SchemaObject, SecuritySchemeObject } from 'openapi3-ts/oas30';
 import {
     publicFileSourceRequestSchema,
     publicFileSourceResponseSchema,
@@ -43,6 +43,20 @@ const publicGetTreeResponseSchema: SchemaObject = {
     },
     required: ['tree'],
     additionalProperties: false,
+};
+
+const securitySchemes: Record<string, SecuritySchemeObject> = {
+    bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        description: 'Send a Sourcebot API key, legacy API key, or OAuth access token in the Authorization header.',
+    },
+    sourcebotApiKey: {
+        type: 'apiKey',
+        in: 'header',
+        name: 'X-Sourcebot-Api-Key',
+        description: 'Send a Sourcebot API key in the X-Sourcebot-Api-Key header.',
+    },
 };
 
 function jsonContent(schema: ZodTypeAny | SchemaObject) {
@@ -229,14 +243,23 @@ export function createPublicOpenApiDocument(version: string) {
             version,
             description: 'OpenAPI description for the public Sourcebot REST endpoints used for search, repository listing, and file browsing.',
         },
+        security: [
+            { bearerAuth: [] },
+            { sourcebotApiKey: [] },
+        ],
         tags: [searchTag, reposTag, filesTag, miscTag],
     });
 
-    document.components = document.components ?? {};
-    document.components.schemas = {
-        ...(document.components.schemas ?? {}),
+    const components: ComponentsObject = document.components ?? {};
+    components.schemas = {
+        ...(components.schemas ?? {}),
         PublicFileTreeNode: publicFileTreeNodeSchema,
     };
+    components.securitySchemes = {
+        ...(components.securitySchemes ?? {}),
+        ...securitySchemes,
+    };
+    document.components = components;
 
     return document;
 }

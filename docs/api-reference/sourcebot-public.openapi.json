@@ -5,6 +5,14 @@
     "version": "v4.15.6",
     "description": "OpenAPI description for the public Sourcebot REST endpoints used for search, repository listing, and file browsing."
   },
+  "security": [
+    {
+      "bearerAuth": []
+    },
+    {
+      "sourcebotApiKey": []
+    }
+  ],
   "tags": [
     {
       "name": "Search",
@@ -512,8 +520,7 @@
         "properties": {
           "version": {
             "type": "string",
-            "description": "Running Sourcebot version.",
-            "example": "v4.15.2"
+            "description": "Running Sourcebot version."
           }
         },
         "required": [
@@ -657,7 +664,20 @@
         "additionalProperties": false
       }
     },
-    "parameters": {}
+    "parameters": {},
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Send a Sourcebot API key, legacy API key, or OAuth access token in the Authorization header."
+      },
+      "sourcebotApiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Sourcebot-Api-Key",
+        "description": "Send a Sourcebot API key in the X-Sourcebot-Api-Key header."
+      }
+    }
   },
   "paths": {
     "/api/search": {
